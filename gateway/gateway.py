@@ -27,7 +27,7 @@ class ExceptionHandling():
                 data = request.get_data(),
                 params = request.args,
                 json = body,
-                timeout=110
+                timeout=1
             )
 
             status_code = response.status_code
