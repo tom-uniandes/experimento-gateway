@@ -5,7 +5,7 @@ import os
 sqs = boto3.client('sqs')
 if os.environ.get('SQS_QUEUE_URL'):
     queue_url = os.environ.get('SQS_QUEUE_URL')
-    print("SQS PRODCUTION URL: " + queue_url)
+    print("SQS PRODUCTION URL: " + queue_url)
 else:
     queue_url = "test-queue"
     print("SQS TEST URL: " + queue_url)
