@@ -41,7 +41,7 @@ class ExceptionHandling():
                 )
             else:
                 response = Queue.send_message_queue(self, event, endpoint, method, params, body)
-                
+                return {}, 204
 
             status_code = response.status_code
 
@@ -54,12 +54,6 @@ class ExceptionHandling():
         except requests.exceptions.Timeout as e:
             logger.info("Log error: " + str(e))
             status_code = 504
-            response = jsonify(self.get_response(status_code, message_error))
-            return response, status_code
-        
-        except requests.exceptions.RequestException as e:
-            logger.info("Log error: " + str(e))
-            status_code = getattr(e.response, 'status_code', 500)
             response = jsonify(self.get_response(status_code, message_error))
             return response, status_code
         
