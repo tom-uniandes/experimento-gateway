@@ -2,7 +2,12 @@ from flask import json
 import boto3
 import os
 
-sqs = boto3.client('sqs')
+if os.environ.get('AWS_REGION'):
+    region = os.environ.get('AWS_REGION')
+    sqs = boto3.client('sqs', region_name=region)
+else:
+    raise Exception("Region must be defined")
+
 if os.environ.get('SQS_QUEUE_URL'):
     queue_url = os.environ.get('SQS_QUEUE_URL')
     print("SQS PRODUCTION URL: " + queue_url)

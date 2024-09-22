@@ -36,6 +36,7 @@ def report_incident(id):
 def resource_not_found(error):
     return ExceptionHandling.get_message_not_found_url(ExceptionHandling)
 
+# Ping endpoint
 @app.route('/ping', methods=['GET'])
 def ping():
     return "pong", 200
