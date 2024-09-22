@@ -1,6 +1,12 @@
 from flask import request, json, jsonify
 import requests
 from .queue import Queue
+import logging
+import os
+
+logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"))
+logger = logging.getLogger(__name__)
+
 
 message_error = "Error to send request, please try again"
 
@@ -46,19 +52,19 @@ class ExceptionHandling():
             return json.loads(response.content), response.status_code
         
         except requests.exceptions.Timeout as e:
-            print("Log error: " + str(e))
+            logger.info("Log error: " + str(e))
             status_code = 504
             response = jsonify(self.get_response(status_code, message_error))
             return response, status_code
         
         except requests.exceptions.RequestException as e:
-            print("Log error: " + str(e))
+            logger.info("Log error: " + str(e))
             status_code = getattr(e.response, 'status_code', 500)
             response = jsonify(self.get_response(status_code, message_error))
             return response, status_code
         
         except Exception as e:
-            print("Log error: " + str(e))
+            logger.info("Log error: " + str(e))
             status_code = 500
             response = jsonify(self.get_response(status_code, message_error))
             return response, status_code
