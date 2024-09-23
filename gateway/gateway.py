@@ -39,8 +39,10 @@ class ExceptionHandling():
                     json = body,
                     timeout=1
                 )
+                logger.info(f"Response: {response}")
             else:
                 response = Queue.send_message_queue(self, event, endpoint, method, params, body)
+                logger.info(f"Response: {response}")
                 return {}, 204
 
             status_code = response.status_code

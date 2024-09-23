@@ -29,7 +29,7 @@ def report_incidents():
     
 @app.route('/report-incident/<id>', methods=['POST','GET','PUT','DELETE'])
 def report_incident(id):
-    return ExceptionHandling.communicate_to_microservice(ExceptionHandling, EVENT_INCIDENTS, urlBaseReports_incidents + "/incident/{id}")
+    return ExceptionHandling.communicate_to_microservice(ExceptionHandling, EVENT_INCIDENTS, urlBaseReports_incidents + f"/incident/{id}")
     
 
 @app.errorhandler(404)
